@@ -10,38 +10,55 @@ class NewTransaction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      // shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(20.0)),
-      child: Container(
-        padding: EdgeInsets.all(10.0),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: '輸入花費項目'),
-                onChanged: (value) {
-                  titleController.text = value;
-                },
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: '輸入花費金額'),
-                onChanged: (value) {
-                  amountController.text = value;
-                },
-              ),
-              FlatButton(
-                  onPressed: () {
-                    addTx(titleController.text,
-                        double.parse(amountController.text));
-                  },
-                  child: Text('確認'),
-                  textColor: Colors.purple),
-            ],
+        elevation: 5,
+        // shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          height: 150,
+          // constraints: BoxConstraints.,
+          padding: EdgeInsets.all(10.0),
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    decoration: InputDecoration(labelText: '輸入花費項目'),
+                    onChanged: (value) {
+                      titleController.text = value;
+                    },
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    decoration: InputDecoration(labelText: '輸入花費金額'),
+                    onChanged: (value) {
+                      amountController.text = value;
+                    },
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: FlatButton(
+                    onPressed: () {
+                      addTx(titleController.text,
+                          double.parse(amountController.text));
+                    },
+                    textColor: Colors.purple,
+                    child: Container(
+                      child: Text('確認',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          )),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

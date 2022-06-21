@@ -36,10 +36,7 @@ class MyHomePage extends StatelessWidget {
               borderOnForeground: true,
             ),
           ),
-          Expanded(
-            child: UserTransactions(),
-            flex: 7,
-          )
+          UserTransactions(),
         ],
       ),
     );
