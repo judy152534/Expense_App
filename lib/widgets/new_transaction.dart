@@ -7,6 +7,20 @@ class NewTransaction extends StatelessWidget {
 
   NewTransaction(this.addTx);
 
+  // Do not repeat yourself. So extract the method out!
+  void submitData() {
+    final summitTitle = titleController.text;
+    final sumitAmount = amountController.text.isNotEmpty
+        ? double.parse(amountController.text)
+        : 0;
+
+    if (summitTitle.isEmpty || sumitAmount <= 0) {
+      return;
+    }
+
+    addTx(summitTitle, sumitAmount);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -37,15 +51,13 @@ class NewTransaction extends StatelessWidget {
                     onChanged: (value) {
                       amountController.text = value;
                     },
+                    onSubmitted: (_) => submitData,
                   ),
                 ),
                 Expanded(
                   flex: 2,
                   child: FlatButton(
-                    onPressed: () {
-                      addTx(titleController.text,
-                          double.parse(amountController.text));
-                    },
+                    onPressed: submitData,
                     textColor: Colors.purple,
                     child: Container(
                       child: Text('確認',
