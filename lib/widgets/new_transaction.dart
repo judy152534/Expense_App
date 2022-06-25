@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTx;
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
 
   NewTransaction(this.addTx);
 
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
   // Do not repeat yourself. So extract the method out!
   void submitData() {
-    final summitTitle = titleController.text;
-    final sumitAmount = amountController.text.isNotEmpty
+    final submitTitle = titleController.text;
+    final submitAmount = amountController.text.isNotEmpty
         ? double.parse(amountController.text)
         : 0;
 
-    if (summitTitle.isEmpty || sumitAmount <= 0) {
+    if (submitTitle.isEmpty || submitAmount <= 0) {
       return;
     }
 
-    addTx(summitTitle, sumitAmount);
+    // widget is a property that can call in state to get sth in statefulWidget
+    widget.addTx(submitTitle, submitAmount);
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -28,7 +38,7 @@ class NewTransaction extends StatelessWidget {
         // shape: RoundedRectangleBorder(
         //     borderRadius: BorderRadius.circular(20.0)),
         child: Container(
-          height: 150,
+          height: 250,
           // constraints: BoxConstraints.,
           padding: EdgeInsets.all(10.0),
           child: Container(
